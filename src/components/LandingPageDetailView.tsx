@@ -272,7 +272,7 @@ export const LandingPageDetailView: React.FC<LandingPageDetailViewProps> = ({
   );
 
   return (
-    <div className="bg-slate-50 text-slate-900 min-h-screen pb-24 sm:pb-12 animate-fadeIn" dir="rtl">
+    <div className="flex min-h-screen flex-col bg-slate-50 text-slate-900 animate-fadeIn" dir="rtl">
       
       {/* 1. Top Announcement Bar */}
       <div className="overflow-hidden border-b border-amber-400/20 bg-slate-900 py-2.5 text-sm font-bold text-amber-300 shadow-xs" dir="ltr">
@@ -291,7 +291,7 @@ export const LandingPageDetailView: React.FC<LandingPageDetailViewProps> = ({
       </div>
 
       {/* 3. Main Container */}
-      <main className="max-w-[1440px] mx-auto px-4 sm:px-6 pt-5 sm:pt-6 space-y-5">
+      <main className="max-w-[1440px] mx-auto flex-1 px-4 sm:px-6 pt-5 sm:pt-6 space-y-5">
         {(() => {
           const badgeText = product.badge || '🔥 عرض خاص - توصيل مجاني';
           const headline = product.heroHeadline || product.title;
@@ -904,7 +904,7 @@ export const LandingPageDetailView: React.FC<LandingPageDetailViewProps> = ({
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-6 px-4 text-center text-xs border-t border-slate-800 space-y-1 mt-8">
+      <footer className="bg-slate-900 text-slate-400 px-4 pt-6 pb-24 text-center text-xs border-t border-slate-800 space-y-1 mt-8 sm:pb-12">
         <p className="font-bold text-slate-300">جميع الحقوق محفوظة © {new Date().getFullYear()} ORYX STORE | متجر أوريكس السعودي</p>
         <p className="text-xs text-slate-500">الدفع عند الاستلام | توصيل سريع لكافة مناطق ومدن المملكة</p>
       </footer>
