@@ -136,7 +136,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1">
+      <main className={currentView === 'home' || currentView === 'store' ? '' : 'flex-1'}>
         {currentView === 'home' && (
           <HomeView
             products={currentProducts}
