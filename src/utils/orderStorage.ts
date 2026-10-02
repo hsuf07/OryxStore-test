@@ -2,7 +2,7 @@ import { Order, Product } from '../types';
 
 const STORAGE_KEY = 'oryx_orders_v1';
 const WEBHOOK_KEY = 'oryx_sheets_webhook_v1';
-const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwK5oghyIc8PAXmPANN05YnGzk1X5Eajuiq4f8YaiSRxiL0H5DnhpIJ1I28rYDIfWKvOg/exec';
+const DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxOApBFluDinG5d-QgdM-6raMqcHT5o8rWzD-Rnep6b8P-irli9-OlcVEpokRLMuO7q4Q/exec';
 
 export function getSavedOrders(): Order[] {
   try {

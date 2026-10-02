@@ -25,73 +25,74 @@ export const StoreView: React.FC<StoreViewProps> = ({
   }).sort((a, b) => {
     if (sortBy === 'price-asc') return a.price - b.price;
     if (sortBy === 'price-desc') return b.price - a.price;
-    if (sortBy === 'rating') return b.rating - a.rating;
+    if (sortBy === 'rating') return (b.rating ?? 0) - (a.rating ?? 0);
     return 0;
   });
 
   return (
-    <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 animate-fadeIn">
+    <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6 animate-fadeIn">
       
       {/* Title Header */}
-      <div className="bg-gradient-to-r from-indigo-50 via-white to-slate-100 p-8 rounded-3xl border border-slate-200/80 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="space-y-2 text-center md:text-right">
-          <div className="inline-flex items-center gap-2 bg-indigo-100 px-3.5 py-1.5 rounded-full text-indigo-800 text-xs font-bold">
-            <Store className="w-4 h-4" /> متجر أوريكس الشامل
+      <div className="flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2.5 shadow-sm sm:rounded-2xl sm:px-5 sm:py-3">
+        <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-teal-50 text-teal-700 sm:h-11 sm:w-11">
+            <Store className="h-5 w-5" />
+          </span>
+          <div className="min-w-0">
+            <p className="text-[11px] font-bold text-teal-700 sm:text-xs">متجر أوريكس</p>
+            <h1 className="truncate text-lg font-black leading-tight text-slate-950 sm:text-2xl">تسوّق منتجاتنا</h1>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black">جميع المنتجات المتوفرة</h1>
-          <p className="text-slate-600 text-sm max-w-xl">
-            اكتشف تشكيلتنا الكاملة من المنتجات العالية الجودة في المملكة مع إمكانية الطلب السريع والدفع عند الاستلام.
-          </p>
         </div>
 
-        <div className="bg-white/80 px-6 py-4 rounded-2xl border border-slate-200 text-center">
-          <span className="text-2xl font-black text-indigo-700">{filteredProducts.length}</span>
-          <span className="block text-xs text-slate-500">منتج متاح</span>
+        <div className="shrink-0 rounded-lg border border-teal-100 bg-teal-50 px-2.5 py-1.5 text-center sm:px-4 sm:py-2">
+          <span className="text-lg font-black leading-none text-teal-700 sm:text-xl">{filteredProducts.length}</span>
+          <span className="ms-1 text-[11px] font-bold text-slate-600 sm:ms-1.5 sm:text-xs">منتج</span>
         </div>
       </div>
 
       {/* Search & Filters Bar */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+      <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white p-2.5 shadow-sm sm:gap-3 sm:p-3">
         
         {/* Search Input */}
-        <div className="relative w-full md:w-96">
-          <Search className="absolute right-3.5 top-3.5 w-4 h-4 text-slate-400" />
+        <div className="relative min-w-0 flex-1">
+          <Search className="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
             placeholder="ابحث عن أي منتج..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pr-10 pl-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-600 focus:bg-white transition-all"
+            className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 ps-3 pe-9 text-xs transition-all focus:border-teal-600 focus:bg-white focus:outline-none sm:py-2.5 sm:text-sm"
           />
         </div>
 
         {/* Sort Dropdown */}
-        <div className="flex items-center gap-2 w-full md:w-auto justify-end">
-          <SlidersHorizontal className="w-4 h-4 text-slate-500" />
-          <span className="text-xs font-bold text-slate-600">ترتيب حسب:</span>
+        <div className="flex shrink-0 items-center gap-1.5">
+          <SlidersHorizontal className="hidden h-4 w-4 text-slate-500 sm:block" />
+          <span className="hidden text-xs font-bold text-slate-600 sm:block">ترتيب حسب:</span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="bg-slate-50 border border-slate-200 text-xs font-bold rounded-xl px-3 py-2.5 focus:outline-none focus:border-indigo-600"
+            aria-label="ترتيب المنتجات"
+            className="max-w-[7.5rem] rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-[11px] font-bold focus:border-teal-600 focus:outline-none sm:max-w-none sm:px-3 sm:py-2.5 sm:text-xs"
           >
-            <option value="default">الافتراضي (الأكثر طلباً)</option>
-            <option value="price-asc">السعر: من الأرخص للأغلى</option>
-            <option value="price-desc">السعر: من الأغلى للأرخص</option>
-            <option value="rating">التقييم: الأعلى تقييماً</option>
+            <option value="default">الأكثر طلباً</option>
+            <option value="price-asc">الأرخص أولاً</option>
+            <option value="price-desc">الأغلى أولاً</option>
+            <option value="rating">الأعلى تقييماً</option>
           </select>
         </div>
 
       </div>
 
       {/* Categories Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2">
+      <div className="-mx-4 flex items-center gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
         {CATEGORIES.map((cat) => (
           <button
             key={cat.id}
             onClick={() => setSelectedCategory(cat.id)}
-            className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+            className={`shrink-0 rounded-lg px-4 py-2 text-xs font-bold transition-all whitespace-nowrap ${
               selectedCategory === cat.id
-                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+                ? 'bg-teal-700 text-white shadow-sm'
                 : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
             }`}
           >
@@ -107,7 +108,7 @@ export const StoreView: React.FC<StoreViewProps> = ({
           <p className="text-xs text-slate-500">جرب البحث بكلمات أخرى أو اختر فئة مختلفة.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4">
           {filteredProducts.map((product) => (
             <ProductCard
               key={product.id}
